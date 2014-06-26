@@ -1,9 +1,6 @@
-//LIMITATIONS: Only HSL (no rgb)
-//preserve drawingbuffer must be on! (static painting at end)
+//TODO: GET moxie's crazy animal code
 
-//FIGURE OUT SCREENSPACE TO WORLD SPACE!!
-
-var camera, renderer, projector, scene, controls, clock;
+var camera, renderer, projector, scene, controls, clock, field;
 var particleGroup;
 var line;
 var randFloat = THREE.Math.randFloat;
@@ -23,7 +20,7 @@ function init() {
 
 
   camera = new THREE.PerspectiveCamera(45, w / h, 0.1, 2000);
-  camera.position.z = 120;
+  camera.position.z = 10;
   projector = new THREE.Projector();
 
 
@@ -33,10 +30,13 @@ function init() {
   renderer.setSize(w, h);
   document.body.appendChild(renderer.domElement);
 
+  field = new Field();
+
 }
 
 function animate() {
   TWEEN.update();
+  field.update();
   renderer.render(scene, camera);
   requestAnimationFrame(animate);
 }

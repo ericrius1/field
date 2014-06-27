@@ -3,7 +3,17 @@
 var camera, renderer, projector, scene, controls, clock, field, grass;
 var line;
 var randFloat = THREE.Math.randFloat;
+var itemsToLoad = 2;
+var shaders  = new ShaderLoader('js/shaders');
+shaders.shaderSetLoaded = function(){
+  itemsToLoad--;
+  if(itemsToLoad === 0){
+    start();
+  }
+}
 
+shaders.load('fs-lines', 'lines', 'fragment');
+shaders.load('vs-lines', 'lines', 'vertex');
 
 window.addEventListener('resize', onWindowResize);
 
@@ -22,8 +32,10 @@ function loadColor() {
   img.onload = function() {
     context.clearRect(0, 0, canvas.width, canvas.height);
     context.drawImage(this, 0, 0);
-    init();
-    animate();
+    itemsToLoad--;
+    if(itemsToLoad === 0){
+      start();
+    }
   }
   img.src="assets/grass.jpg"
 }
@@ -34,6 +46,10 @@ function getPixel(x, y){
   };
   var data = context.getImageData(x, y, 1, 1).data;
   return {r:data[0], g:data[1], b:data[2]};
+}
+function start(){
+  init();
+  animate();
 }
 
 function init() {

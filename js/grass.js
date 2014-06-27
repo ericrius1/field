@@ -36,8 +36,8 @@ var Grass = function() {
   var shaderMaterial = new THREE.ShaderMaterial({
     uniforms: uniforms,
     attributes: attributes,
-    vertexShader: document.getElementById('vertexshader_lines').textContent,
-    fragmentShader: document.getElementById('fragmentshader_lines').textContent
+    vertexShader: shaders.vertexShaders.lines,
+    fragmentShader: shaders.fragmentShaders.lines
   });
 
   shaderMaterial.linewidth = 1;

@@ -1,13 +1,13 @@
-//TODO: GET moxie's crazy animal code
+
 
 var camera, renderer, projector, scene, controls, clock, field, grass;
 var line;
 var randFloat = THREE.Math.randFloat;
 var itemsToLoad = 2;
-var shaders  = new ShaderLoader('js/shaders');
-shaders.shaderSetLoaded = function(){
+var shaders = new ShaderLoader('js/shaders');
+shaders.shaderSetLoaded = function() {
   itemsToLoad--;
-  if(itemsToLoad === 0){
+  if (itemsToLoad === 0) {
     start();
   }
 }
@@ -16,6 +16,16 @@ shaders.load('fs-lines', 'lines', 'fragment');
 shaders.load('vs-lines', 'lines', 'vertex');
 
 window.addEventListener('resize', onWindowResize);
+
+var audio = loadAudio('assets/song.mp3');
+audio.play();
+
+function loadAudio(uri) {
+  var audio = new Audio();
+  audio.src = uri;
+  return audio;
+}
+
 
 var w = window.innerWidth;
 var h = window.innerHeight;
@@ -33,21 +43,30 @@ function loadColor() {
     context.clearRect(0, 0, canvas.width, canvas.height);
     context.drawImage(this, 0, 0);
     itemsToLoad--;
-    if(itemsToLoad === 0){
+    if (itemsToLoad === 0) {
       start();
     }
   }
-  img.src="assets/grass.jpg"
+  img.src = "assets/grass.jpg"
 }
 
-function getPixel(x, y){
-  if(isNaN(x) || isNaN(y)){
-    return {r:1, g:1, b:1}
+function getPixel(x, y) {
+  if (isNaN(x) || isNaN(y)) {
+    return {
+      r: 1,
+      g: 1,
+      b: 1
+    }
   };
   var data = context.getImageData(x, y, 1, 1).data;
-  return {r:data[0], g:data[1], b:data[2]};
+  return {
+    r: data[0],
+    g: data[1],
+    b: data[2]
+  };
 }
-function start(){
+
+function start() {
   init();
   animate();
 }
@@ -63,7 +82,7 @@ function init() {
   projector = new THREE.Projector();
 
   renderer = new THREE.WebGLRenderer({
-    antialias: false
+    // antialias: false
   });
   renderer.setSize(w, h);
   renderer.autoClear = false;

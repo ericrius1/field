@@ -5,4 +5,12 @@
   left: 37%;
 	font-size: 20px;
 	text-align: center;
+  font-family: Verdana;
+  opacity: 0.8;
+  color: #3FD2DF;
+}
+
+@font-face {
+  font-family: Ceria_Lebaran;
+  src: url("../assets/Ceria_Lebaran.otf") format("opentype");
 }

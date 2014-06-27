@@ -43,14 +43,14 @@ var Grass = function() {
   shaderMaterial.linewidth = 1;
 
   var lineGeo = new THREE.Geometry();
-  var radius = 40;
+  var radius = 50;
 
   var lngArray = [];
   var seedArray = [];
   var colorArray = [];
   var drawArray = [];
 
-  var numOfPoints = 4000;
+  var numOfPoints = 10000;
 
   var points = pointsOnSphere(numOfPoints);
 
@@ -137,6 +137,6 @@ var Grass = function() {
       delta = 1000/60;
     }
 
-    uniforms.globalTime.value += delta * 0.008;
+    uniforms.globalTime.value += delta * .001;
   }
 }

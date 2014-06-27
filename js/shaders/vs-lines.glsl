@@ -13,7 +13,7 @@ const vec3 axisy = vec3(0.0, 1.0, 0.0);
 const vec3 axisz = vec3(0.0, 0.0, 1.0);
 
 const vec3 center = vec3(0.0, 0.0, 0.0);
-const float strength = 1.0;
+const float strength = 8.0;
 
 
 void main() {

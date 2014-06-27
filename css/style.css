@@ -9,8 +9,3 @@
   opacity: 0.8;
   color: #892AA3;
 }
-
-@font-face {
-  font-family: Ceria_Lebaran;
-  src: url("../assets/Ceria_Lebaran.otf") format("opentype");
-}

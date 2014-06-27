@@ -1,5 +1,7 @@
 var Field = function(){
 
+  
+
   var fieldGroup = new SPE.Group({
     texture: THREE.ImageUtils.loadTexture('assets/point.png'),
     maxAge: 10

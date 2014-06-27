@@ -1,7 +1,6 @@
 //TODO: GET moxie's crazy animal code
 
-var camera, renderer, projector, scene, controls, clock, field;
-var particleGroup;
+var camera, renderer, projector, scene, controls, clock, field, grass;
 var line;
 var randFloat = THREE.Math.randFloat;
 
@@ -15,6 +14,7 @@ var h = window.innerHeight;
 
 init();
 animate();
+
 function init() {
   clock = new THREE.Clock();
 
@@ -26,18 +26,36 @@ function init() {
 
   scene = new THREE.Scene();
 
-  renderer = new THREE.WebGLRenderer();
+  renderer = new THREE.WebGLRenderer({
+    antilias: false
+  });
   renderer.setSize(w, h);
-  document.body.appendChild(renderer.domElement);
+  renderer.autoClear = false;
 
+  // postprocessing
+  var renderModel = new THREE.RenderPass(scene, camera);
+  var effectBloom = new THREE.BloomPass(1.4);
+  var effectCopy = new THREE.ShaderPass(THREE.CopyShader);
+  effectCopy.renderToScreen = true;
+
+  composer = new THREE.EffectComposer(renderer);
+
+  composer.addPass(renderModel);
+  composer.addPass(effectBloom);
+  composer.addPass(effectCopy);
+
+  document.body.appendChild(renderer.domElement);
   field = new Field();
+
+  grass = new Grass();
 
 }
 
 function animate() {
   TWEEN.update();
   field.update();
-  renderer.render(scene, camera);
+  renderer.clear();
+  composer.render(0.01);
   requestAnimationFrame(animate);
 }
 
@@ -50,4 +68,3 @@ function onWindowResize() {
   camera.aspect = window.innerWidth / window.innerHeight;
   camera.updateProjectionMatrix();
 }
-

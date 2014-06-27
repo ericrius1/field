@@ -58,7 +58,7 @@ function init() {
   scene = new THREE.Scene();
 
   camera = new THREE.PerspectiveCamera(60, w / h, 0.1, 2000);
-  camera.position.z = 150;
+  camera.position.z = 100;
   camera.lookAt(scene.position);
   projector = new THREE.Projector();
 

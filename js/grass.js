@@ -50,7 +50,7 @@ var Grass = function() {
   var colorArray = [];
   var drawArray = [];
 
-  var numOfPoints = 15000;
+  var numOfPoints = 4000;
 
   var points = pointsOnSphere(numOfPoints);
 
@@ -71,7 +71,7 @@ var Grass = function() {
 
     for (var j = 0; j < num; j++) {
       var vertex = new THREE.Vector3().copy(base);
-      var lng = radius + (j * 3);
+      var lng = radius + (j);
       var color = new THREE.Color(0xffffff);
       var black = (j / num) + 0.2;
       color.setRGB((c.r / 255) * black, (c.g / 255) * black, (c.b / 255) * black);

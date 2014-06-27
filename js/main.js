@@ -10,24 +10,44 @@ window.addEventListener('resize', onWindowResize);
 var w = window.innerWidth;
 var h = window.innerHeight;
 
+var canvas = document.createElement('canvas');
+canvas.width = 256;
+canvas.height = 256;
+var context = canvas.getContext('2d');
 
+loadColor();
 
-init();
-animate();
+function loadColor() {
+  var img = new Image();
+  img.onload = function() {
+    context.clearRect(0, 0, canvas.width, canvas.height);
+    context.drawImage(this, 0, 0);
+    init();
+    animate();
+  }
+  img.src="assets/grass.jpg"
+}
+
+function getPixel(x, y){
+  if(isNaN(x) || isNaN(y)){
+    return {r:1, g:1, b:1}
+  };
+  var data = context.getImageData(x, y, 1, 1).data;
+  return {r:data[0], g:data[1], b:data[2]};
+}
 
 function init() {
   clock = new THREE.Clock();
 
-
-  camera = new THREE.PerspectiveCamera(45, w / h, 0.1, 2000);
-  camera.position.z = 10;
-  projector = new THREE.Projector();
-
-
   scene = new THREE.Scene();
 
+  camera = new THREE.PerspectiveCamera(60, w / h, 0.1, 2000);
+  camera.position.z = 150;
+  camera.lookAt(scene.position);
+  projector = new THREE.Projector();
+
   renderer = new THREE.WebGLRenderer({
-    antilias: false
+    antialias: false
   });
   renderer.setSize(w, h);
   renderer.autoClear = false;
@@ -54,6 +74,7 @@ function init() {
 function animate() {
   TWEEN.update();
   field.update();
+  grass.update();
   renderer.clear();
   composer.render(0.01);
   requestAnimationFrame(animate);

@@ -17,8 +17,8 @@ shaders.load('vs-lines', 'lines', 'vertex');
 
 window.addEventListener('resize', onWindowResize);
 
-var audio = loadAudio('assets/song.mp3');
-audio.play();
+// var audio = loadAudio('assets/song.mp3');
+// audio.play();
 
 function loadAudio(uri) {
   var audio = new Audio();

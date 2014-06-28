@@ -128,6 +128,10 @@ var Grass = function() {
     return upts;
   }
 
+  function pointsOnPlane(n){
+    
+  }
+
   this.update = function() {
     time = new Date().getTime();
     delta = time - oldTime;
